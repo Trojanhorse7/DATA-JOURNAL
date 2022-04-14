@@ -110,6 +110,6 @@ app.post("/compose", (req,res) => {
 
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Server started on port ${3000}`);
 });
