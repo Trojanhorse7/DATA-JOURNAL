@@ -7,6 +7,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import _ from "lodash";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 import mongoose from 'mongoose';
 
 const app = express();
@@ -25,8 +28,9 @@ app.use(express.static("public"));
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://trojan:Trojan123@cluster0.fc4ep.mongodb.net/dataJournal?retryWrites=true&w=majority');
+  await mongoose.connect(process.env.URL);
 }
+
 
 const postSchema = {
   title: String,
@@ -41,7 +45,7 @@ app.get("/", (req, res) => {
     if (!err) {
       res.render("home", {
         posts: posts
-        });
+      });
     }
   });
 });
@@ -110,6 +114,6 @@ app.post("/compose", (req,res) => {
 
 });
 
-app.listen(process.env.PORT || port, () => {
-  console.log(`Server started on port ${3000}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server started on port ${process.env.PORT}`);
 });
