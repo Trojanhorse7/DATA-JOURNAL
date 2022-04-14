@@ -1,0 +1,20 @@
+<%- include('partials/header'); -%>
+
+<h1>HOME</h1>
+<p>All Journals which are written, get added here.</p>
+<p>To get started, Click Compose</p>
+
+<div class="post">
+    <% posts.forEach((post) => { %>
+        <h1><%= post.title %></h1>
+        <p><%= post.content.substring(0, 100)%>
+        <a href="/posts/<%= post._id %>">Read More</a>
+        <form action>
+            <button class="btn  btn-large btn-primary"><a class="btn-link" href="/delete/<%= post._id %>">DELETE</a></button>
+        </form>
+        </p>
+        
+    <% }); %>
+</div>
+
+<%- include('partials/footer'); -%>
